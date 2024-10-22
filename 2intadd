@@ -1,0 +1,30 @@
+ORG 100h
+START:
+
+MOV AH, 1       ; Function to take single character input
+INT 21h         ; Interrupt to take input from keyboard
+SUB AL, 30h     ; Convert ASCII to integer (subtract 30h from the ASCII value of '0')
+MOV BL, AL      ; Store the first number in BL
+
+; Taking the second single-digit integer input
+MOV AH, 1       ; Function to take single character input
+INT 21h         ; Interrupt to take input from keyboard
+SUB AL, 30h     ; Convert ASCII to integer
+MOV BH, AL      ; Store the second number in BH
+
+; Perform the addition: BL + BH
+MOV AL, BL      ; Move first number (BL) to AL
+ADD AL, BH      ; Add the second number (BH) to AL
+
+; Convert result to ASCII for display
+ADD AL, 30h     ; Convert integer result to ASCII
+MOV DL, AL      ; Move result to DL for printing
+MOV AH, 2       ; Function to print a character
+INT 21h         ; Interrupt to print result
+
+; End the program
+MOV AH, 4Ch     ; Function to terminate the program
+INT 21h         ; Interrupt to terminate
+
+END START
+
