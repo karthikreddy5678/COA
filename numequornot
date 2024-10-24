@@ -1,0 +1,30 @@
+org 100h
+
+mov ah, 01h
+int 21h
+sub al, 30h
+mov bl, al
+
+mov ah, 01h
+int 21h
+sub al, 30h
+
+cmp al, bl
+je equal
+
+mov ah, 09h
+lea dx, not_equal_msg
+int 21h
+jmp exit
+
+equal:
+mov ah, 09h
+lea dx, equal_msg
+int 21h
+
+exit:
+mov ah, 4ch
+int 21h
+
+equal_msg db 'Numbers are equal$'
+not_equal_msg db 'Numbers are not equal$'
